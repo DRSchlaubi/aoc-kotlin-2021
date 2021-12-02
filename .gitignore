@@ -138,4 +138,4 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/kotlin,gradle,intellij+iml
 
-src/main/resources/*.txt
+src/main/resources/**/*.txt

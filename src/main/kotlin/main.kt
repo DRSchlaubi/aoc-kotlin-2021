@@ -3,6 +3,8 @@ package dev.schlaubi.aoc
 import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KClass
 import kotlin.reflect.full.primaryConstructor
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
 
 private val numbers = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four")
 
@@ -20,14 +22,19 @@ fun main(args: Array<String>) {
     println("Got outputs: ${context.outputs}")
 }
 
+@OptIn(ExperimentalTime::class)
 private fun TaskContainer.run(context: TaskContext) {
     val clazz = Class.forName("$pack.$className").kotlin
     val constructor = clazz.primaryConstructor ?: error("Class needs to have a constructor")
     val task = constructor.call() as? Task ?: error("Class needs to implement Task")
 
     runBlocking {
-        println("Starting Task: ${task::class.qualifiedName}")
-        task.run(context)
+        val qualifiedName = task::class.qualifiedName
+        println("Starting Task: $qualifiedName")
+        val time = measureTime {
+            task.run(context)
+        }
+        println("Task $qualifiedName finished in $time")
     }
 }
 
