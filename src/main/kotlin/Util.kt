@@ -5,6 +5,8 @@ import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.io.path.readText
 
+private val onePlusWhitespacesRegex = "\\s+".toRegex()
+
 /**
  * Tries reading the input file [name] for the current challenge.
  *
@@ -26,3 +28,5 @@ private fun Any.determinePath(name: String): Path {
     val path = Path(resource.file)
     return path
 }
+
+fun String.splitByWhitespaces() = split(onePlusWhitespacesRegex)
