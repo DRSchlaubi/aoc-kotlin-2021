@@ -9,5 +9,4 @@ class Task1 : Task {
             start.x == end.x || start.y == end.y
         }
     }
-
 }

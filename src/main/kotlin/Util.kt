@@ -30,3 +30,5 @@ private fun Any.determinePath(name: String): Path {
 }
 
 fun String.splitByWhitespaces() = split(onePlusWhitespacesRegex)
+
+fun <T> T.repeat(times: Int) = generateSequence { this }.take(times).toList()
