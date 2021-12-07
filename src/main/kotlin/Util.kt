@@ -4,6 +4,7 @@ import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.io.path.readText
+import kotlin.math.abs
 
 private val onePlusWhitespacesRegex = "\\s+".toRegex()
 
@@ -25,10 +26,11 @@ private fun Any.determinePath(name: String): Path {
     val dayPackage = javaClass.packageName.substringAfter("dev.schlaubi.aoc.")
     val resource = ClassLoader.getSystemResource("${dayPackage}/$name")
     requireNotNull(resource) { "Input file ${dayPackage}/$name not found" }
-    val path = Path(resource.file)
-    return path
+    return Path(resource.file)
 }
 
 fun String.splitByWhitespaces() = split(onePlusWhitespacesRegex)
 
 fun <T> T.repeat(times: Int) = generateSequence { this }.take(times).toList()
+
+fun Int.diff(b: Int) = abs(this - b)
