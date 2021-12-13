@@ -14,7 +14,7 @@ class Task2 : Task {
         while (!foundFirstMegaFlash) {
             counter++
             lastRoundResult = lastRoundResult.round().second
-            if (lastRoundResult.all { it.all { it == 0 } }) {
+            if (lastRoundResult.all { row -> row.all { it == 0 } }) {
                 foundFirstMegaFlash = true
             }
         }
